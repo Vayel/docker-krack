@@ -12,7 +12,10 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "debian/jessie64"
+  config.vm.box = "nexces/ubuntu-zesty"
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -33,6 +36,7 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", type: "dhcp"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -51,8 +55,8 @@ Vagrant.configure("2") do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
-  #
+    # vb.gui = true
+    vb.name = "mininet-krack"
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   end
@@ -64,10 +68,15 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    echo "ubuntu:ubuntu" | sudo chpasswd
     apt-get update
     apt-get install -y git
+    echo "auto eth1" >> /etc/network/interfaces
+    echo "iface eth1 inet dhcp" >> /etc/network/interfaces
     git clone https://github.com/intrig-unicamp/mininet-wifi
     cd mininet-wifi
     util/install.sh -Wnfvl
+    echo LANG=\"en_US.UTF-8\" | sudo tee /etc/default/locale
+    reboot
   SHELL
 end
