@@ -76,5 +76,7 @@ Vagrant.configure("2") do |config|
     git clone https://github.com/intrig-unicamp/mininet-wifi
     cd mininet-wifi
     util/install.sh -Wnfvl
+    echo LANG=\"en_US.UTF-8\" | sudo tee /etc/default/locale
+    reboot
   SHELL
 end
