@@ -36,15 +36,19 @@ vagrant ssh
 ```bash
 # Open terminals on stations
 xterm sta1 sta1 sta1 sta2 sta2
-
-# Run the script to check the vulnerability
-sta1 ./krack.py wpa_supplicant -Dnl80211 -i sta1-wlan0 -c sta1_0.staconf
 ```
 
 * On both `sta1` (in one of the opened XTerm) and `sta2`, connect to the AP:
 
 ```bash
 ./connect_wifi.sh N # N = 1 or 2 is the numero of the station
+```
+
+* On `sta2`:
+
+```bash
+ping 10.0.0.1
+# Should work
 ```
 
 * On `sta1`:
