@@ -35,7 +35,7 @@ vagrant ssh
 
 ```bash
 # Open terminals on stations
-xterm sta1 sta1 sta1 sta2 sta2
+xterm sta1 sta1 sta1 sta1 sta2 sta2
 ```
 
 * On both `sta1` (in one of the opened XTerm) and `sta2`, connect to the AP:
@@ -48,7 +48,7 @@ xterm sta1 sta1 sta1 sta2 sta2
 
 ```bash
 ./ping_sta.sh 1
-# Should work
+# Should work. If so, can stop ping
 ```
 
 * On `sta1`:
