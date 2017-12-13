@@ -66,6 +66,6 @@ xterm sta1 sta1 sta1 sta2 sta2
 * On `sta1`:
 
 ```bash
-./roam.sh
-# Observe the result in the Vagrant machine
+./roam.sh 1
+# Observe the result in the console where KRACK script is running
 ```
