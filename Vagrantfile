@@ -18,7 +18,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y git xorg
+    apt-get install -y git xorg python-pip
+    pip install scapy
     echo "auto eth1" >> /etc/network/interfaces
     echo "iface eth1 inet dhcp" >> /etc/network/interfaces
     git clone https://github.com/intrig-unicamp/mininet-wifi
