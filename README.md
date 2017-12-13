@@ -47,20 +47,20 @@ xterm sta1 sta1 sta1 sta2 sta2
 * On `sta2`:
 
 ```bash
-ping 10.0.0.1
+./ping_sta.sh 1
 # Should work
 ```
 
 * On `sta1`:
 
 ```bash
-./krack.py -i sta1-wlan0
+./krack.sh 1
 ```
 
 * On `sta2`:
 
 ```bash
-ping 10.0.0.1
+./ping_sta.sh 1
 ```
 
 * On `sta1`:
