@@ -238,6 +238,7 @@ class KRAckAttackFt():
 		elif p.addr1 == self.clientmac and Dot11WEP in p:
 			iv = dot11_get_iv(p)
 			log(INFO, "AP transmitted data using IV=%d (seq=%d)" % (iv, dot11_get_seqnum(p)))
+			log(INFO, repr(p[Dot11WEP].wepdata))
 			self.ivs[iv].append(p)
 
 			# FIXME: When the client disconnects (or reconnects), clear the set of used IVs
