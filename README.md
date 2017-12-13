@@ -22,4 +22,38 @@ vagrant up
 vagrant ssh
 ```
 
-* Run the network: https://www.youtube.com/watch?v=aA4notyZph0&feature=youtu.be&t=19s
+* Run the network (cf. https://www.youtube.com/watch?v=aA4notyZph0&feature=youtu.be&t=19s):
+
+```bash
+sudo python krack-mininet-wifi.py
+```
+
+* In the Mininet-Wifi console:
+
+```bash
+# Get AP ip (probably 10.0.0.101)
+dump
+
+# Open terminals on the station
+xterm sta1 sta1
+
+# Run the script to check the vulnerability
+sta1 ./krack.py wpa_supplicant -Dnl80211 -i sta1-wlan0 -c sta1_0.staconf
+```
+
+* On `sta1` (in one of the two opened XTerm), ping the AP:
+
+```bash
+ping 10.0.0.101
+```
+
+* On `sta1`, in the second XTerm:
+
+```bash
+wpa_cli
+# Get the BSSID of the station (probably 02:00:00:00:00:01)
+> status
+# Roam (TODO: explain)
+> roam 02:00:00:00:00:01
+# Observe the result in the Vagrant machine
+```
