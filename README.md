@@ -44,18 +44,6 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 ./connect_wifi.sh N # N = 1 or 2 is the numero of the station
 ```
 
-* On `sta2`:
-
-```bash
-./ping_sta.sh 1
-# Should work. If so, can stop ping
-```
-
-* On `sta1`:
-
-```bash
-./krack.sh 1
-```
 
 * On `sta1`:
 
@@ -70,6 +58,19 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 ```
 
 * On `sta1`:
+
+```bash
+./krack.sh 1
+```
+
+* On `sta1`:
+
+```bash
+./roam.sh 1
+```
+
+* Send some messages with netcat from `sta2` to `sta1`
+* To reset the key, run on `sta1`:
 
 ```bash
 ./roam.sh 1
