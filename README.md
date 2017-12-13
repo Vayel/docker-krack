@@ -50,10 +50,6 @@ ping 10.0.0.101
 * On `sta1`, in the second XTerm:
 
 ```bash
-wpa_cli
-# Get the BSSID of the station (probably 02:00:00:00:00:01)
-> status
-# Roam (TODO: explain)
-> roam 02:00:00:00:00:01
+./roam.sh
 # Observe the result in the Vagrant machine
 ```
