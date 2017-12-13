@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
     cd mininet-wifi
     util/install.sh -Wnfvl
     echo LANG=\"en_US.UTF-8\" | sudo tee /etc/default/locale
+    git clone https://github.com/Vayel/docker-krack
     echo "cd /home/vagrant/docker-krack" >> /home/vagrant/.bashrc
     reboot
   SHELL
