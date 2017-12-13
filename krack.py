@@ -7,6 +7,7 @@
 
 import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+from collections import defaultdict
 from scapy.all import *
 import sys, socket, struct, time, subprocess, atexit, select
 from datetime import datetime
@@ -197,7 +198,7 @@ class KRAckAttackFt():
 		self.sock  = None
 		self.wpasupp = None
 		self.reassoc = None
-		self.ivs = dict()
+		self.ivs = defaultdict(list)
 		self.next_replay = None
 
 	def handle_rx(self):
@@ -227,25 +228,25 @@ class KRAckAttackFt():
 			else:
 				log(INFO, "Reassociation frame does not appear to be an FT one")
 				self.reassoc = None
-			self.ivs = dict()
+			self.ivs = defaultdict(list)
 
 		elif p.addr2 == self.clientmac and Dot11AssoReq in p:
 			log(INFO, "Detected normal association frame")
 			self.reassoc = None
-			self.ivs = dict()
+			self.ivs = defaultdict(list)
 
 		elif p.addr1 == self.clientmac and Dot11WEP in p:
 			iv = dot11_get_iv(p)
 			log(INFO, "AP transmitted data using IV=%d (seq=%d)" % (iv, dot11_get_seqnum(p)))
+			self.ivs[iv].append(p)
 
 			# FIXME: When the client disconnects (or reconnects), clear the set of used IVs
-			if iv in self.ivs:
+			if len(self.ivs[iv]) > 1:
 				log(INFO, ("IV reuse detected (IV=%d, seq=%d). " +
 					"AP is vulnerable!") % (iv, dot11_get_seqnum(p)), color="green")
-                                p[Dot11WEP].show()
-                                self.ivs[iv][Dot11WEP].show()
+                                log(INFO, "Messages encrypted with this key:", color="green")
+                                log(INFO, "\n\n".join(repr(p[Dot11WEP].wepdata) for p in self.ivs[iv]))
 
-			self.ivs[iv] = p
 
 	def configure_interfaces(self):
 		log(STATUS, "Note: disable Wi-Fi in your network manager so it doesn't interfere with this script")
