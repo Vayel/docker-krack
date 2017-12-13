@@ -25,7 +25,7 @@ vagrant ssh
 * Run the network:
 
 ```bash
-sudo python krack-mininet-wifi.py
+./create_network.sh
 # Sometimes:
 # Would you like to shut down the controller right now? (y/n)
 # yes
