@@ -32,7 +32,7 @@ def topology():
     net.configureWifiNodes()
 
     'plotting graph'
-    net.plotGraph(min_x=-100, min_y=-100, max_x=200, max_y=200)
+    #net.plotGraph(min_x=-100, min_y=-100, max_x=200, max_y=200)
 
     print "*** Starting network"
     net.build()
