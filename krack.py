@@ -197,7 +197,7 @@ class KRAckAttackFt():
 		self.sock  = None
 		self.wpasupp = None
 		self.reassoc = None
-		self.ivs = set()
+		self.ivs = dict()
 		self.next_replay = None
 
 	def handle_rx(self):
@@ -227,12 +227,12 @@ class KRAckAttackFt():
 			else:
 				log(INFO, "Reassociation frame does not appear to be an FT one")
 				self.reassoc = None
-			self.ivs = set()
+			self.ivs = dict()
 
 		elif p.addr2 == self.clientmac and Dot11AssoReq in p:
 			log(INFO, "Detected normal association frame")
 			self.reassoc = None
-			self.ivs = set()
+			self.ivs = dict()
 
 		elif p.addr1 == self.clientmac and Dot11WEP in p:
 			iv = dot11_get_iv(p)
@@ -242,8 +242,10 @@ class KRAckAttackFt():
 			if iv in self.ivs:
 				log(INFO, ("IV reuse detected (IV=%d, seq=%d). " +
 					"AP is vulnerable!") % (iv, dot11_get_seqnum(p)), color="green")
+                                p[Dot11WEP].show()
+                                self.ivs[iv][Dot11WEP].show()
 
-			self.ivs.add(iv)
+			self.ivs[iv] = p
 
 	def configure_interfaces(self):
 		log(STATUS, "Note: disable Wi-Fi in your network manager so it doesn't interfere with this script")
