@@ -20,14 +20,17 @@ Vagrant.configure("2") do |config|
     apt-get update
     apt-get install -y git xorg python-pip
     pip install scapy
+
     echo "auto eth1" >> /etc/network/interfaces
     echo "iface eth1 inet dhcp" >> /etc/network/interfaces
-    git clone https://github.com/intrig-unicamp/mininet-wifi
-    cd mininet-wifi
-    util/install.sh -Wnfvl
-    echo LANG=\"en_US.UTF-8\" | sudo tee /etc/default/locale
+
     git clone https://github.com/Vayel/docker-krack
     echo "cd /home/vagrant/docker-krack" >> /home/vagrant/.bashrc
+
+    git clone https://github.com/intrig-unicamp/mininet-wifi
+    mininet-wifi/util/install.sh -Wnfvl
+
+    echo LANG=\"en_US.UTF-8\" | sudo tee /etc/default/locale
     reboot
   SHELL
 end
