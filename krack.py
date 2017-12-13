@@ -269,7 +269,7 @@ class KRAckAttackFt():
 		self.sock = MitmSocket(type=ETH_P_ALL, iface=self.nic_mon)
 
 		# Open the wpa_supplicant client that will connect to the network that will be tested
-		self.wpasupp = subprocess.Popen(sys.argv[1:])
+		# self.wpasupp = subprocess.Popen(sys.argv[1:])
 
 		# Monitor the virtual monitor interface of the client and perform the needed actions
 		while True:
