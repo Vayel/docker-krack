@@ -21,12 +21,12 @@ def topology():
     print "*** Creating nodes"
     net.addStation('sta1', ip='10.0.0.1/8', position='80,80,0')
     ap1 = net.addAccessPoint('ap1', ip='10.0.0.101/8', mac='02:00:00:00:00:01', ssid="handover", mode="g", channel="1", ieee80211r='yes', mobility_domain='a1b2', passwd='123456789a', encrypt='wpa2', position='10,30,0', inNamespace=True)
-    ap2 = net.addAccessPoint('ap2', ip='10.0.0.102/8', mac='02:00:00:00:00:02', ssid="handover", mode="g", channel="6", ieee80211r='yes', mobility_domain='a1b2', passwd='123456789a', encrypt='wpa2', position='60,30,0', inNamespace=True)
-    ap3 = net.addAccessPoint('ap3', ip='10.0.0.103/8', mac='02:00:00:00:00:03', ssid="handover", mode="g", channel="1", ieee80211r='yes', mobility_domain='a1b2', passwd='123456789a', encrypt='wpa2', position='120,100,0', inNamespace=True)
+    #ap2 = net.addAccessPoint('ap2', ip='10.0.0.102/8', mac='02:00:00:00:00:02', ssid="handover", mode="g", channel="6", ieee80211r='yes', mobility_domain='a1b2', passwd='123456789a', encrypt='wpa2', position='60,30,0', inNamespace=True)
+    #ap3 = net.addAccessPoint('ap3', ip='10.0.0.103/8', mac='02:00:00:00:00:03', ssid="handover", mode="g", channel="1", ieee80211r='yes', mobility_domain='a1b2', passwd='123456789a', encrypt='wpa2', position='120,100,0', inNamespace=True)
     c1 = net.addController('c1', controller=Controller)
 
     print "*** Configuring Propagation Model"
-    net.propagationModel()#"logDistancePropagationLossModel", exp=3.5)
+    net.propagationModel()
 
     print "*** Configuring wifi nodes"
     net.configureWifiNodes()
@@ -38,8 +38,8 @@ def topology():
     net.build()
     c1.start()
     ap1.start([c1])
-    ap2.start([c1])
-    ap3.start([c1])
+    #ap2.start([c1])
+    #ap3.start([c1])
 
     os.system('pkill -f "\wpa_supplicant -B -Dnl80211\"')
 
