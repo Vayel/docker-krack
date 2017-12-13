@@ -57,10 +57,16 @@ xterm sta1 sta1 sta1 sta2 sta2
 ./krack.sh 1
 ```
 
+* On `sta1`:
+
+```bash
+./nc_server.sh
+```
+
 * On `sta2`:
 
 ```bash
-./ping_sta.sh 1
+./nc_client.sh 1
 ```
 
 * On `sta1`:
