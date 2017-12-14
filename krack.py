@@ -244,14 +244,14 @@ class KRAckAttackFt():
 			# FIXME: When the client disconnects (or reconnects), clear the set of used IVs
 			if len(self.ivs[iv]) > 1:
 				log(INFO, ("IV reuse detected (IV=%d, seq=%d). " +
-					"AP is vulnerable!") % (iv, dot11_get_seqnum(p)), color="blue")
+					"AP is vulnerable!\n") % (iv, dot11_get_seqnum(p)), color="red")
                                 print "\n\n".join(
                                     "MESSAGE %d (%s): %s" % (
                                         i,
                                         p[0].strftime("%H:%M:%S"),
                                         repr(p[1][Dot11WEP].wepdata)
                                     ) for i, p in enumerate(self.ivs[iv])
-                                )
+                                ) + "\n"
 
 
 	def configure_interfaces(self):
