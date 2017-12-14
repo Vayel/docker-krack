@@ -239,14 +239,19 @@ class KRAckAttackFt():
 			iv = dot11_get_iv(p)
 			log(INFO, "AP transmitted data using IV=%d (seq=%d)" % (iv, dot11_get_seqnum(p)), color="green")
 			log(INFO, repr(p[Dot11WEP].wepdata))
-			self.ivs[iv].append(p)
+			self.ivs[iv].append((datetime.now(), p))
 
 			# FIXME: When the client disconnects (or reconnects), clear the set of used IVs
 			if len(self.ivs[iv]) > 1:
 				log(INFO, ("IV reuse detected (IV=%d, seq=%d). " +
-					"AP is vulnerable!") % (iv, dot11_get_seqnum(p)), color="red")
-                                log(INFO, "Messages encrypted with (IV=%d, seq=%d):" % (iv, dot11_get_seqnum(p)), color="red")
-                                log(INFO, "\n\n".join(repr(p[Dot11WEP].wepdata) for p in self.ivs[iv]))
+					"AP is vulnerable!") % (iv, dot11_get_seqnum(p)), color="blue")
+                                print "\n\n".join(
+                                    "MESSAGE %d (%s): %s" % (
+                                        i,
+                                        p[0].strftime("%H:%M:%S"),
+                                        repr(p[1][Dot11WEP].wepdata)
+                                    ) for i, p in enumerate(self.ivs[iv])
+                                )
 
 
 	def configure_interfaces(self):
