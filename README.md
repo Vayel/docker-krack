@@ -41,25 +41,28 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 * On both `sta1` (in one of the opened XTerm) and `sta2`, connect to the AP:
 
 ```bash
-./connect_wifi.sh N # N = 1 or 2 is the numero of the station
+./connect_wifi.sh N # N = 1 or 2 is the number of the station
 ```
 
 
 * On `sta1`:
 
 ```bash
+# Create a server to receive packets
 ./nc_listen.sh
 ```
 
 * On `sta2`:
 
 ```bash
+# Send "a message" to machine sta1
 ./nc_send.sh 1 "a message"
 ```
 
 * On `sta1`:
 
 ```bash
+# Launch a man-in-the-middle attack and print an alert when key is reused
 ./krack.sh 1
 ```
 
@@ -67,6 +70,7 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 * On `sta1`:
 
 ```bash
+# Reinitialise the message counter
 ./roam.sh 1
 ```
 
