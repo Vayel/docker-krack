@@ -228,12 +228,12 @@ class KRAckAttackFt():
 			else:
 				#log(INFO, "Reassociation frame does not appear to be an FT one")
 				self.reassoc = None
-			self.ivs = defaultdict(list)
+			#self.ivs = defaultdict(list)
 
 		elif p.addr2 == self.clientmac and Dot11AssoReq in p:
 			#log(INFO, "Detected normal association frame")
 			self.reassoc = None
-			self.ivs = defaultdict(list)
+			#self.ivs = defaultdict(list)
 
 		elif p.addr1 == self.clientmac and Dot11WEP in p:
 			iv = dot11_get_iv(p)
