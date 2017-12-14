@@ -63,6 +63,7 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 ./krack.sh 1
 ```
 
+* Now send multiple messages from sta2 to sta1. If a key is used on m messages, after roam.sh is executed we will be available to display the content of 2m messages. Each key will have been used to encrypt 2 messages. So if you send m messages before the roam you will be able to 'see' m messages after the roam.
 * On `sta1`:
 
 ```bash
@@ -75,3 +76,5 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 ```bash
 ./roam.sh 1
 ```
+
+* Now, you can use the crib-dragging technique to recover messages that have been encrypted with the same key without knowing the wpa key. Refer to the [article](https://zestedesavoir.com/articles/2284/krack-attaques-contre-les-communications-wi-fi/) written by Vincent Lefoulon for more information on the technique.
