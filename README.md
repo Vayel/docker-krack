@@ -48,13 +48,13 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 * On `sta1`:
 
 ```bash
-./nc_server.sh
+./nc_listen.sh
 ```
 
 * On `sta2`:
 
 ```bash
-./nc_client.sh 1
+./nc_send.sh 1 "a message"
 ```
 
 * On `sta1`:
@@ -74,5 +74,4 @@ xterm sta1 sta1 sta1 sta1 sta2 sta2
 
 ```bash
 ./roam.sh 1
-# Observe the result in the console where KRACK script is running
 ```
