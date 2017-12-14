@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #i=$1
 #host=10.0.0.$i
