@@ -237,14 +237,13 @@ class KRAckAttackFt():
 
 		elif p.addr1 == self.clientmac and Dot11WEP in p:
 			iv = dot11_get_iv(p)
-			log(INFO, "AP transmitted data using IV=%d (seq=%d)" % (iv, dot11_get_seqnum(p)), color="green")
-			log(INFO, repr(p[Dot11WEP].wepdata))
+			log(INFO, "AP transmitted data using IV=%d (seq=%d)" % (iv, dot11_get_seqnum(p)))
 			self.ivs[iv].append((datetime.now(), p))
 
 			# FIXME: When the client disconnects (or reconnects), clear the set of used IVs
 			if len(self.ivs[iv]) > 1:
 				log(INFO, ("IV reuse detected (IV=%d, seq=%d). " +
-					"AP is vulnerable!\n") % (iv, dot11_get_seqnum(p)), color="red")
+					"AP is vulnerable!\n") % (iv, dot11_get_seqnum(p)), color="green")
                                 print "\n\n".join(
                                     "MESSAGE %d (%s): %s" % (
                                         i,
